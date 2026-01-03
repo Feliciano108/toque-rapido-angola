@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toque Rápido Angola</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .game {
+      text-align: center;
+      background: #020617;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    h1 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+    .score {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #22c55e;
+      color: #000;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:active {
+      background: #16a34a;
+    }
+    .timer {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="game">
+    <h1>Toque Rápido Angola</h1>
+    <p>Toca no botão o máximo de vezes em 10 segundos!</p>
+    <div class="score">Pontuação: <span id="score">0</span></div>
+    <div class="timer">Tempo: <span id="time">10</span>s</div>
+    <button id="tapBtn">TOCAR</button>
+    <button onclick="startGame()">Iniciar / Reiniciar</button>
+  </div>  <script>
+    let score = 0;
+    let timeLeft = 10;
+    let timer;
+    let playing = false;
+
+    const scoreEl = document.getElementById('score');
+    const timeEl = document.getElementById('time');
+    const tapBtn = document.getElementById('tapBtn');
+
+    function startGame() {
+      score = 0;
+      timeLeft = 10;
+      playing = true;
+      scoreEl.textContent = score;
+      timeEl.textContent = timeLeft;
+
+      clearInterval(timer);
+      timer = setInterval(() => {
+        timeLeft--;
+        timeEl.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          playing = false;
+          alert('Fim do jogo! Pontuação final: ' + score);
+        }
+      }, 1000);
+    }
+
+    tapBtn.addEventListener('click', () => {
+      if (!playing) return;
+      score++;
+      scoreEl.textContent = score;
+    });
+  </script></body>
+</html>
